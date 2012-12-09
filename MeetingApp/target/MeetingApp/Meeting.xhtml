@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"   
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      >
+    <h:head>
+        <h:outputStylesheet library="css" name="/table-style.css"  />
+    </h:head>
+    <h:body style="background-color:#{meetingBean.meeting.bgColor}">
+        <h1>#{meetingBean.meeting.title}</h1>
+        <h3>Dato: #{meetingBean.meeting.meetingDate}</h3>
+        <h3>Arrangør: #{meetingBean.meeting.meetingHost}</h3>
+        <h:dataTable value="#{meetingBean.meeting.slots}" var="o"
+                     styleClass="order-table"
+                     headerClass="order-table-header"
+                     rowClasses="order-table-odd-row,order-table-even-row"
+                     border="1" cellpadding="5" cellspacing="10">
+
+            <h:column>
+                <!-- column header -->
+                <f:facet name="header">Tid</f:facet>
+                <!-- row record -->
+                #{o.timeStart} - #{o.timeStop}
+            </h:column>
+            <h:column>
+                <f:facet name="header">Hvem</f:facet>
+                #{o.presenter}
+            </h:column>
+            <h:column>
+                <f:facet name="header">Emne</f:facet>
+                #{o.subject}
+            </h:column>
+        </h:dataTable>
+    </h:body>
+</html>

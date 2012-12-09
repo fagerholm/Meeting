@@ -1,0 +1,38 @@
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd
+    http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+  
+    <changeSet id="1" author="jon">
+        <comment>A first test of Liquibase</comment>
+        <createTable tableName="MEETING">
+            <column name="ID" type="BIGINT" >
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="HOST" type="varchar(50)"/>
+            <column name="DATE" type="varchar(10)"/>
+            <column name="BGCOLOR" type="varchar(12)"/>
+            <column name="TITLE" type="varchar(50)"/>
+        </createTable>
+    </changeSet>
+    <changeSet id="2" author="jon">
+        <comment>A first test of Liquibase</comment>
+        <createTable tableName="MEETINGSLOT">
+            <column name="ID" type="BIGINT" >
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="TIMESTOP" type="varchar(5)"/>
+            <column name="TIMESTART" type="varchar(5)"/>
+            <column name="SUBJECT" type="varchar(255)"/>
+            <column name="PRESENTER" type="varchar(50)"/>
+        </createTable>
+    </changeSet>
+    <changeSet id="3" author="jon">
+        <createSequence sequenceName="meeting_seq"/>
+    </changeSet>
+    <changeSet id="4" author="jon">
+        <createSequence sequenceName="meetingslot_seq"/>
+    </changeSet>
+</databaseChangeLog>
