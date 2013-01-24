@@ -20,7 +20,9 @@ public class MeetingRepository {
     EntityManager em;
     
     public void persist(Meeting meeting){
-        em.persist(meeting);
+        if(meeting != null){
+            em.persist(meeting);
+        }
     }
     
     public List<Meeting> findAll(){

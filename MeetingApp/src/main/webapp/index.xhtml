@@ -42,6 +42,10 @@
                 <a href="../meetings/json/#{o.id}">json</a>
                 <a href="../meetings/xml/#{o.id}">xml</a>
             </h:column>
+            <h:column>
+                <f:facet name="header">Operasjon</f:facet>
+                <h:link value="Slett" outcome="MeetingRemover?meetingId=#{o.id}" />
+            </h:column>
         </h:dataTable>
         <h:link value="Last opp ny møteagenda..." outcome="UploadMeeting" /><br/>
         <a href="../meetings/json">Hent lista via REST(json)</a><br/>

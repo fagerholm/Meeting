@@ -16,7 +16,7 @@ public class MeetingFileDomFileReader implements MeetingFileReader {
     @Override
     public Meeting read(String filename)  {
 
-        Meeting meeting = new Meeting();
+        Meeting meeting = null;
         SAXBuilder builder = new SAXBuilder();
         File xmlFile = new File(filename);
 
@@ -25,11 +25,12 @@ public class MeetingFileDomFileReader implements MeetingFileReader {
             Document document = (Document) builder.build(xmlFile);
             Element rootNode = document.getRootElement();
             
-            meeting.setMeetingDate(rootNode.getChildText("dato"));
-            meeting.setTitle(rootNode.getChildText("tittel"));
-            meeting.setMeetingHost(rootNode.getChildText("arrangor"));
-            meeting.setBgColor(rootNode.getChildText("bakgrunnsfarge"));
-            List list = rootNode.getChildren("presentasjon");
+            meeting = new Meeting();            
+            meeting.setMeetingDate(rootNode.getChildText(MeetingFileConstants.NODE_DATE));
+            meeting.setTitle(rootNode.getChildText(MeetingFileConstants.NODE_TITLE));
+            meeting.setMeetingHost(rootNode.getChildText(MeetingFileConstants.NODE_HOST));
+            meeting.setBgColor(rootNode.getChildText(MeetingFileConstants.NODE_BG_COLOR));
+            List list = rootNode.getChildren(MeetingFileConstants.NODE_SLOT);
 
             List<MeetingSlot> slots = new ArrayList<MeetingSlot>();
             
@@ -38,10 +39,10 @@ public class MeetingFileDomFileReader implements MeetingFileReader {
                 
                 Element node = (Element) list.get(i);
 
-                slot.setTimeStart(node.getChildText("tidStart"));
-                slot.setTimeStop(node.getChildText("tidSlutt"));
-                slot.setPresenter(node.getChildText("av"));
-                slot.setSubject(node.getChildText("emne"));
+                slot.setTimeStart(node.getChildText(MeetingFileConstants.NODE_TIME_START));
+                slot.setTimeStop(node.getChildText(MeetingFileConstants.NODE_TIME_END));
+                slot.setPresenter(node.getChildText(MeetingFileConstants.NODE_BY));
+                slot.setSubject(node.getChildText(MeetingFileConstants.NODE_SUBJECT));
 
                 System.out.println(slot.getTimeStart() + " - " + slot.getTimeStop() + ": (" + slot.getPresenter() + ") " + slot.getSubject());
                 slots.add(slot);
